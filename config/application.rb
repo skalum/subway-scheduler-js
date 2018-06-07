@@ -17,3 +17,9 @@ module SubwayScheduler
     # the framework and any gems in your application.
   end
 end
+
+gmaps = GoogleMapsService::Client.new(
+    key: 'AIzaSyAOqXFkBSPiCfklIUZw4cZ5njZGsKycYZc',
+    retry_timeout: 20,      # Timeout for retrying failed request
+    queries_per_second: 10  # Limit total request per second
+)

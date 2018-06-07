@@ -1,4 +1,16 @@
 <%= form_for @address do |f| %>
+  <% if @address.errors.any? %>
+    <h2>
+      <%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:
+    </h2>
+
+    <ul>
+    <% @address.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
   <%= f.label :line_1, "Address, line 1" %>
   <%= f.text_field :line_1 %><br>
 
