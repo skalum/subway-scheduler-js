@@ -7,7 +7,7 @@ class Route < ApplicationRecord
     self.route_addresses.order(stop: :asc).map {|route_address| route_address.address}
   end
 
-  def getDirections
+  def get_directions
     gmaps = GoogleMapsService::Client.new(
         key: 'AIzaSyAOqXFkBSPiCfklIUZw4cZ5njZGsKycYZc',
         retry_timeout: 20,      # Timeout for retrying failed request
@@ -25,8 +25,7 @@ class Route < ApplicationRecord
       end
     end
 
-    self.directions = gmaps.directions(origin, destination,
-                                       waypoints: waypoints, mode: mode)
+    gmaps.directions(origin, destination, waypoints: waypoints, mode: mode)
   end
 
 end
