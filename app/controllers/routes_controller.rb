@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class RoutesController < ApplicationController
   before_action :require_logged_in
 
   def index
@@ -6,9 +6,9 @@ class AddressesController < ApplicationController
       redirect_to current_user, alert: "User not found."
     elsif params[:user_id]
       @user = User.find(params[:user_id])
-      @addresses = @user.addresses
+      @routes = @user.routes
     else
-      @addresses = Address.all
+      @routes = Route.all
     end
   end
 
@@ -16,7 +16,7 @@ class AddressesController < ApplicationController
     if params[:user_id] && !User.exists?(params[:user_id])
       redirect_to users_path, alert: "User not found."
     else
-      @address = Address.new(user_id: params[:user_id])
+      @route = Route.new(user_id: params[:user_id])
     end
   end
 

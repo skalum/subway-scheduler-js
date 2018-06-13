@@ -1,0 +1,7 @@
+<h1>Routes for <%= @user.full_name %></h1>
+
+<ul>
+  <% @routes.each do |route| %>
+    <li><%= route.steps.first.line_1 %> - <%= route.steps.last.line_1 %></li>
+  <% end %>
+</ul>

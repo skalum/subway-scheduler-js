@@ -1,0 +1,14 @@
+<h1>All
+  <% if @user %>
+    <%= @user.full_name %>'s
+  <% end %>
+  Addresses
+</h1>
+
+<ul>
+<% @addresses.each do |address| %>
+  <li><%= link_to address.line_1, address_path(address) %></li>
+<% end %>
+</ul>
+<br>
+<%= link_to "Add New Address", new_address_path %>

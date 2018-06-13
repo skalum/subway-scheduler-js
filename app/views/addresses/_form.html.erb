@@ -11,6 +11,13 @@
     </ul>
   <% end %>
 
+  <% if @address.user.nil? %>
+    <%= f.label :user_id, "User" %>
+    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :full_name) %><br>
+  <% else %>
+    <%= f.hidden_field :user_id %>
+  <% end %>
+
   <%= f.label :line_1, "Address, line 1" %>
   <%= f.text_field :line_1 %><br>
 

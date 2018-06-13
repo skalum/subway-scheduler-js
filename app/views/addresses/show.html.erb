@@ -1,12 +1,14 @@
 <h1><%= @address.line_1 %></h1>
 
-<p><strong>Belongs to: <%= @user.full_name %></strong></p>
+<p><strong>Belongs to: <%= @address.user.full_name %></strong></p>
 
 <p>
-  <%= @address.line_1 %>
-  <%= @address.line_2 %>
+  <%= @address.line_1 %><br>
+  <% if @address.line_2 != "" %>
+    <%= @address.line_2 %><br>
+  <% end %>
   <%= @address.city %>, <%= @address.state %> <%= @address.zip %>
 </p>
 
 <%= link_to "Edit address", edit_address_path %>
-<%= link_to "Delete address", delete_address_path %>
+<%= link_to "Delete address", address_path, method: :delete %>
