@@ -30,7 +30,7 @@
   <br>
 
   <%= f.label :origin, "Or, create a new address for the origin"%><br>
-  <%= f.fields_for :origin, @route.origin do |origin_fields| %>
+  <%= f.fields_for @route.origin, @route.build_origin do |origin_fields| %>
     <%= origin_fields.label :line_1 %>
     <%= origin_fields.text_field :line_1 %><br>
 
@@ -53,7 +53,7 @@
   <br>
 
   <%= f.label :destination, "Or, create a new address for the destination"%><br>
-  <%= f.fields_for :destination, @route.destination do |destination_fields| %>
+  <%= f.fields_for @route.destination, @route.build_destination do |destination_fields| %>
     <%= destination_fields.label :line_1 %>
     <%= destination_fields.text_field :line_1 %><br>
 

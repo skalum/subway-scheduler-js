@@ -2,6 +2,14 @@
 
 <ul>
   <% @routes.each do |route| %>
-    <li><%= route.origin.line_1 %> - <%= route.destination.line_1 %></li>
+    <li>
+      <%= link_to route.name, route_path(route) %>
+      <ul>
+        <li>Origin: <%= route.origin.to_s %></li>
+        <li>Destination: <%= route.destination %></li>
+      </ul>
+    </li>
   <% end %>
 </ul>
+
+<%= link_to "New route", new_route_path %>

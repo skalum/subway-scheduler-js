@@ -6,10 +6,11 @@ class RoutesController < ApplicationController
       redirect_to current_user, alert: "User not found."
     elsif params[:user_id]
       @user = User.find(params[:user_id])
-      @routes = @user.routes
     else
-      @routes = Route.all
+      @user = current_user
     end
+
+    @routes = @user.routes
   end
 
   def new
@@ -17,6 +18,7 @@ class RoutesController < ApplicationController
       redirect_to users_path, alert: "User not found."
     else
       @route = Route.new(user_id: params[:user_id])
+      binding.pry
     end
   end
 
@@ -43,18 +45,18 @@ class RoutesController < ApplicationController
   end
 
   def edit
-  if params[:user_id]
-    user = User.find(params[:user_id])
-    if user.nil?
-      redirect_to users_path, alert: "User not found."
+    if params[:user_id]
+      user = User.find(params[:user_id])
+      if user.nil?
+        redirect_to users_path, alert: "User not found."
+      else
+        @route = user.routes.find(params[:id])
+        redirect_to user_routes_path(user), alert: "Route not found." if @route.nil?
+      end
     else
-      @route = user.routes.find(params[:id])
-      redirect_to user_routes_path(user), alert: "Route not found." if @route.nil?
+      @route = Route.find(params[:id])
     end
-  else
-    @route = Route.find(params[:id])
   end
-end
 
   def update
     @route = Route.find(params[:id])
@@ -66,10 +68,10 @@ end
   end
 
   def destroy
-    @address = Address.find(params[:id])
-    @address.destroy
-    flash[:notice] = "Address deleted."
-    redirect_to addresses_path
+    @route = Route.find(params[:id])
+    @route.destroy
+    flash[:notice] = "Route deleted."
+    redirect_to routes_path
   end
 
   private
