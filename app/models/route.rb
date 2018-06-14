@@ -3,15 +3,19 @@ class Route < ApplicationRecord
   belongs_to :destination, class_name: 'Address', foreign_key: 'destination_id'
   belongs_to :user
 
-  accepts_nested_attributes_for :origin
-  accepts_nested_attributes_for :destination
+#  accepts_nested_attributes_for :origin, reject_if: :all_blank, allow_destroy: true
+#  accepts_nested_attributes_for :destination, reject_if: :all_blank, allow_destroy: true
 
   def origin_attributes=(origin_attributes)
-    self.origin = Address.find_or_create_by(origin_attributes)
+    if origin_attributes.any? {|k, v| v != ""}
+      self.origin = Address.find_or_create_by(origin_attributes)
+    end
   end
 
   def destination_attributes=(destination_attributes)
-    self.destination = Address.find_or_create_by(destination_attributes)
+    if destination_attributes.any? {|k, v| v != ""}
+      self.destination = Address.find_or_create_by(destination_attributes)
+    end
   end
 
   def get_directions

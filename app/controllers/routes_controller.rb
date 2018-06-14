@@ -48,17 +48,18 @@ class RoutesController < ApplicationController
     if user.nil?
       redirect_to users_path, alert: "User not found."
     else
-      @address = user.addresses.find(params[:id])
-      redirect_to user_addresses_path(user), alert: "Address not found." if @address.nil?
+      @route = user.routes.find(params[:id])
+      redirect_to user_routes_path(user), alert: "Route not found." if @route.nil?
     end
   else
-    @address = Address.find(params[:id])
+    @route = Route.find(params[:id])
   end
 end
 
   def update
-    if @address.update(address_params)
-      redirect_to @address
+    @route = Route.find(params[:id])
+    if @route.update(route_params)
+      redirect_to @route
     else
       render :edit
     end
@@ -74,7 +75,7 @@ end
   private
 
   def route_params
-    params.require(:route).permit(:user_id, :origin_id, :destination_id,
+    params.require(:route).permit(:user_id, :origin_id, :destination_id, :name,
                                     origin_attributes: [:line_1, :line_2, :city,
                                                         :state, :zip],
                                     destination_attributes: [:line_1, :line_2,
