@@ -19,25 +19,19 @@ ActiveRecord::Schema.define(version: 2018_05_29_204725) do
     t.string "state"
     t.string "zip"
     t.string "label"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
-  end
-
-  create_table "route_addresses", force: :cascade do |t|
-    t.integer "route_id"
-    t.integer "address_id"
-    t.integer "stop"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_route_addresses_on_address_id"
-    t.index ["route_id"], name: "index_route_addresses_on_route_id"
   end
 
   create_table "routes", force: :cascade do |t|
+    t.integer "origin_id"
+    t.integer "destination_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_routes_on_destination_id"
+    t.index ["origin_id"], name: "index_routes_on_origin_id"
+    t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

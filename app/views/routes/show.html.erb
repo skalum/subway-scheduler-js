@@ -1,0 +1,50 @@
+<h1><%= @route.user.full_name %>'s Route</h1>
+
+<h3>Origin</h3>
+<p>
+  <%= @route.origin.line_1 %><br>
+  <% if @route.origin.line_2 != "" %>
+    <%= @route.origin.line_2 %><br>
+  <% end %>
+  <%= @route.origin.city %>, <%= @route.origin.state %> <%= @route.origin.zip %>
+</p>
+
+<h3>Destination</h3>
+<p>
+  <%= @route.destination.line_1 %><br>
+  <% if @route.destination.line_2 != "" %>
+    <%= @route.destination.line_2 %><br>
+  <% end %>
+  <%= @route.destination.city %>, <%= @route.destination.state %> <%= @route.destination.zip %>
+</p>
+
+<h2>Directions</h2>
+<ul>
+  <% @route.get_directions[0][:legs][0][:steps].each do |step| %>
+    <li>
+      <%= raw step[:html_instructions] %>
+      (<%= raw step[:duration][:text] %>;
+
+      <% if step[:transit_details].present? %>
+        <%= raw step[:transit_details][:num_stops] %> stops)
+        <ul>
+          <li>
+            <%= image_tag step[:transit_details][:line][:icon] %> to
+            <%= raw step[:transit_details][:arrival_stop][:name] %>
+          </li>
+        </ul>
+      <% else %>
+        <%= raw step[:distance][:text] %>)
+      <% end %>
+
+      <% if step[:steps].present? %>
+        <ul>
+          <% step[:steps].each do |step| %>
+            <li><%= raw step[:html_instructions] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+    </li>
+  <% end %>
+</ul>

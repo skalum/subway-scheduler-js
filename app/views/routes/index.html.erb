@@ -2,6 +2,6 @@
 
 <ul>
   <% @routes.each do |route| %>
-    <li><%= route.steps.first.line_1 %> - <%= route.steps.last.line_1 %></li>
+    <li><%= route.origin.line_1 %> - <%= route.destination.line_1 %></li>
   <% end %>
 </ul>

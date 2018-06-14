@@ -21,10 +21,10 @@ class RoutesController < ApplicationController
   end
 
   def create
-    @address = Address.new(address_params)
+    @route = Route.new(route_params)
 
-    if @address.save
-      redirect_to @address
+    if @route.save
+      redirect_to @route
     else
       render :new
     end
@@ -33,12 +33,12 @@ class RoutesController < ApplicationController
   def show
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
-      @address = @user.addresses.find(params[:id])
-      if @address.nil?
-        redirect_to user_addresses_path, alert: "Address not found."
+      @route = @user.routes.find(params[:id])
+      if @route.nil?
+        redirect_to user_routes_path, alert: "Route not found."
       end
     else
-      @address = Address.find(params[:id])
+      @route = Route.find(params[:id])
     end
   end
 
@@ -73,8 +73,13 @@ end
 
   private
 
-  def address_params
-    params.require(:address).permit(:line_1, :line_2, :city, :state, :zip,
-                                    :user_id)
+  def route_params
+    params.require(:route).permit(:user_id, :origin_id, :destination_id,
+                                    origin_attributes: [:line_1, :line_2, :city,
+                                                        :state, :zip],
+                                    destination_attributes: [:line_1, :line_2,
+                                                             :city, :state,
+                                                             :zip]
+                                    )
   end
 end

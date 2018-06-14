@@ -1,10 +1,17 @@
 class Route < ApplicationRecord
-  has_many :route_addresses
-  has_many :addresses, through: :route_addresses
-  has_many :users, through: :addresses
+  belongs_to :origin, class_name: 'Address', foreign_key: 'origin_id'
+  belongs_to :destination, class_name: 'Address', foreign_key: 'destination_id'
+  belongs_to :user
 
-  def steps
-    self.route_addresses.order(stop: :asc).map {|route_address| route_address.address}
+  accepts_nested_attributes_for :origin
+  accepts_nested_attributes_for :destination
+
+  def origin_attributes=(origin_attributes)
+    self.origin = Address.find_or_create_by(origin_attributes)
+  end
+
+  def destination_attributes=(destination_attributes)
+    self.destination = Address.find_or_create_by(destination_attributes)
   end
 
   def get_directions
@@ -14,18 +21,7 @@ class Route < ApplicationRecord
         queries_per_second: 10  # Limit total request per second
     )
 
-    mode = 'transit'
-    origin = self.steps.first.to_s
-    destination = self.steps.last.to_s
-    waypoints = []
-
-    if self.steps.count > 2
-      waypoints = self.steps[1..(self.steps.count - 2)].map do |waypoint|
-        waypoint.to_s
-      end
-    end
-
-    gmaps.directions(origin, destination, waypoints: waypoints, mode: mode)
+    gmaps.directions(self.origin.to_s, self.destination.to_s, mode: 'transit')
   end
 
 end

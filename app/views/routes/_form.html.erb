@@ -1,0 +1,71 @@
+<%= form_for @route do |f| %>
+
+  <% if @route.errors.any? %>
+    <h2>
+      <%= pluralize(@route.errors.count, "error") %> prohibited this route from being saved:
+    </h2>
+
+    <ul>
+    <% @route.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <% if @route.user.nil? %>
+    <%= f.label :user_id, "User" %>
+    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :full_name) %><br>
+  <% else %>
+    <%= f.hidden_field :user_id %>
+  <% end %>
+
+  <h2>Origin</h2>
+  <%= f.label :origin_id, "Select previous address" %><br>
+  <%= f.select :origin_id, options_from_collection_for_select(Address.all, :id, :to_s) %><br>
+  <br>
+
+  <%= f.label :origin, "Or, create a new address for the origin"%><br>
+  <%= f.fields_for :origin, @route.build_origin do |origin_fields| %>
+    <%= origin_fields.label :line_1 %>
+    <%= origin_fields.text_field :line_1 %><br>
+
+    <%= origin_fields.label :line_2 %>
+    <%= origin_fields.text_field :line_2 %><br>
+
+    <%= origin_fields.label :city %>
+    <%= origin_fields.text_field :city %><br>
+
+    <%= origin_fields.label :state %>
+    <%= origin_fields.text_field :state %><br>
+
+    <%= origin_fields.label :zip %>
+    <%= origin_fields.text_field :zip %>
+  <% end %>
+
+  <h2>Destination</h2>
+  <%= f.label :destination_is, "Select previous address" %><br>
+  <%= f.select :destination_id, options_from_collection_for_select(Address.all, :id, :to_s) %><br>
+  <br>
+
+  <%= f.label :destination, "Or, create a new address for the destination"%><br>
+  <%= f.fields_for :destination, @route.build_destination do |destination_fields| %>
+    <%= destination_fields.label :line_1 %>
+    <%= destination_fields.text_field :line_1 %><br>
+
+    <%= destination_fields.label :line_2 %>
+    <%= destination_fields.text_field :line_2 %><br>
+
+    <%= destination_fields.label :city %>
+    <%= destination_fields.text_field :city %><br>
+
+    <%= destination_fields.label :state %>
+    <%= destination_fields.text_field :state %><br>
+
+    <%= destination_fields.label :zip %>
+    <%= destination_fields.text_field :zip %><br>
+  <% end %>
+
+  <br>
+
+  <%= f.submit %>
+<% end %>
