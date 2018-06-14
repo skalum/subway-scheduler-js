@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2018_05_29_204725) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "routes", force: :cascade do |t|
+    t.string "name"
     t.integer "origin_id"
     t.integer "destination_id"
     t.integer "user_id"
