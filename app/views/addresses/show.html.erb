@@ -12,11 +12,15 @@
 <ul>
   <% @address.routes.each do |route| %>
     <li>
-      <%= link_to "#{route.name}, owned by: #{route.user.full_name}", route_path(route) %>
-      <ul>
-        <li>Origin: <%= route.origin.to_s %></li>
-        <li>Destination: <%= route.destination.to_s %></li>
-      </ul>
+      <%= link_to "#{route.name}, owned by #{route.user.full_name}", route_path(route) %>
+      <b>
+        <% if route.origin == @address %>
+          Origin
+        <% end %>
+        <% if route.destination == @address %>
+          Destination
+        <% end %>
+      </b>
     </li>
   <% end %>
 </ul>
