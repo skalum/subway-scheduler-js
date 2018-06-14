@@ -3,8 +3,8 @@ class Route < ApplicationRecord
   belongs_to :destination, class_name: 'Address', foreign_key: 'destination_id'
   belongs_to :user
 
-  accepts_nested_attributes_for :origin
-  accepts_nested_attributes_for :destination
+#  accepts_nested_attributes_for :origin
+#  accepts_nested_attributes_for :destination
 
   def origin_attributes=(origin_attributes)
     if origin_attributes.any? {|k, v| v != ""}

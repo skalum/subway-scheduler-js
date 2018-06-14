@@ -18,7 +18,6 @@ class RoutesController < ApplicationController
       redirect_to users_path, alert: "User not found."
     else
       @route = Route.new(user_id: params[:user_id])
-      binding.pry
     end
   end
 

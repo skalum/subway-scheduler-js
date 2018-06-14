@@ -10,6 +10,9 @@
     <%= @route.origin.line_2 %><br>
   <% end %>
   <%= @route.origin.city %>, <%= @route.origin.state %> <%= @route.origin.zip %>
+  <br><br>
+  <%= link_to "Show address", address_path(@route.origin) %> |
+  <%= link_to "Edit address", edit_address_path(@route.origin) %>
 </p>
 
 <h3>Destination</h3>
@@ -19,6 +22,9 @@
     <%= @route.destination.line_2 %><br>
   <% end %>
   <%= @route.destination.city %>, <%= @route.destination.state %> <%= @route.destination.zip %>
+  <br><br>
+  <%= link_to "Show address", address_path(@route.destination) %> |
+  <%= link_to "Edit address", edit_address_path(@route.destination) %>
 </p>
 
 <h2>Directions</h2>

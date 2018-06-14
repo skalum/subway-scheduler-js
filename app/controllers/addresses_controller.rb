@@ -1,27 +1,16 @@
 class AddressesController < ApplicationController
+  before_action :set_address, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in
 
   def index
-    if params[:user_id] && !User.exists?(params[:user_id])
-      redirect_to current_user, alert: "User not found."
-    elsif params[:user_id]
-      @user = User.find(params[:user_id])
-      @addresses = @user.addresses
-    else
-      @addresses = Address.all
-    end
+    @addresses = Address.all
   end
 
   def new
-    if params[:user_id] && !User.exists?(params[:user_id])
-      redirect_to users_path, alert: "User not found."
-    else
-      @address = Address.new(user_id: params[:user_id])
-    end
+    @address = Address.new
   end
 
   def create
-    binding.pry
     @address = Address.new(address_params)
 
     if @address.save
@@ -32,30 +21,10 @@ class AddressesController < ApplicationController
   end
 
   def show
-    if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
-      @address = @user.addresses.find(params[:id])
-      if @address.nil?
-        redirect_to user_addresses_path, alert: "Address not found."
-      end
-    else
-      @address = Address.find(params[:id])
-    end
   end
 
   def edit
-  if params[:user_id]
-    user = User.find(params[:user_id])
-    if user.nil?
-      redirect_to users_path, alert: "User not found."
-    else
-      @address = user.addresses.find(params[:id])
-      redirect_to user_addresses_path(user), alert: "Address not found." if @address.nil?
-    end
-  else
-    @address = Address.find(params[:id])
   end
-end
 
   def update
     if @address.update(address_params)
@@ -66,7 +35,6 @@ end
   end
 
   def destroy
-    @address = Address.find(params[:id])
     @address.destroy
     flash[:notice] = "Address deleted."
     redirect_to addresses_path
@@ -74,8 +42,11 @@ end
 
   private
 
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
   def address_params
-    params.require(:address).permit(:line_1, :line_2, :city, :state, :zip,
-                                    :user_id)
+    params.require(:address).permit(:line_1, :line_2, :city, :state, :zip)
   end
 end
