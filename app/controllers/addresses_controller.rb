@@ -3,7 +3,11 @@ class AddressesController < ApplicationController
   before_action :require_logged_in
 
   def index
-    @addresses = Address.all
+    if params[:borough]
+      @addresses = Address.select_borough(params[:borough])
+    else
+      @addresses = Address.all
+    end
   end
 
   def new
@@ -47,6 +51,6 @@ class AddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:line_1, :line_2, :city, :state, :zip)
+    params.require(:address).permit(:line_1, :line_2, :city, :borough, :zip)
   end
 end

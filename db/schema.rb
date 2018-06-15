@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_204725) do
     t.string "line_1"
     t.string "line_2"
     t.string "city"
-    t.string "state"
+    t.string "borough"
     t.string "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -78,9 +78,9 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:user_id, :origin_id, :destination_id, :name,
                                     origin_attributes: [:line_1, :line_2, :city,
-                                                        :state, :zip],
+                                                        :borough, :zip],
                                     destination_attributes: [:line_1, :line_2,
-                                                             :city, :state,
+                                                             :city, :borough,
                                                              :zip]
                                     )
   end

@@ -7,13 +7,13 @@ class Route < ApplicationRecord
 #  accepts_nested_attributes_for :destination
 
   def origin_attributes=(origin_attributes)
-    if origin_attributes.any? {|k, v| v != ""}
+    if origin_attributes.reject {|k, v| k == "borough" }.any? {|k, v| v != ""}
       self.origin = Address.find_or_create_by(origin_attributes)
     end
   end
 
   def destination_attributes=(destination_attributes)
-    if destination_attributes.any? {|k, v| v != ""}
+    if destination_attributes.reject {|k, v| k == "borough" }.any? {|k, v| v != ""}
       self.destination = Address.find_or_create_by(destination_attributes)
     end
   end
@@ -26,6 +26,14 @@ class Route < ApplicationRecord
     )
 
     gmaps.directions(self.origin.to_s, self.destination.to_s, mode: 'transit')
+  end
+
+  def has_origin?(address)
+    address == self.origin
+  end
+
+  def has_destination?(address)
+    address == self.destination
   end
 
 end
