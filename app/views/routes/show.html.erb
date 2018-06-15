@@ -1,15 +1,11 @@
 <h1>
-  <%= @route.user.full_name %>'s Route: <%= @route.name %>
+  <%= link_to @route.user.full_name, user_path(@route.user) %>'s Route: <%= @route.name %>
 </h1>
 
 
 <h3>Origin</h3>
 <p>
-  <%= @route.origin.line_1 %><br>
-  <% if @route.origin.line_2 != "" %>
-    <%= @route.origin.line_2 %><br>
-  <% end %>
-  <%= @route.origin.city %>, <%= @route.origin.state %> <%= @route.origin.zip %>
+  <%= render partial: 'addresses/block', locals: {address: @route.origin} %>
   <br><br>
   <%= link_to "Show address", address_path(@route.origin) %> |
   <%= link_to "Edit address", edit_address_path(@route.origin) %>
@@ -17,11 +13,7 @@
 
 <h3>Destination</h3>
 <p>
-  <%= @route.destination.line_1 %><br>
-  <% if @route.destination.line_2 != "" %>
-    <%= @route.destination.line_2 %><br>
-  <% end %>
-  <%= @route.destination.city %>, <%= @route.destination.state %> <%= @route.destination.zip %>
+  <%= render partial: 'addresses/block', locals: {address: @route.destination} %>
   <br><br>
   <%= link_to "Show address", address_path(@route.destination) %> |
   <%= link_to "Edit address", edit_address_path(@route.destination) %>

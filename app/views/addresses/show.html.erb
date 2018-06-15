@@ -1,23 +1,21 @@
 <h1><%= @address.line_1 %></h1>
 
 <p>
-  <%= @address.line_1 %><br>
-  <% if @address.line_2 != "" %>
-    <%= @address.line_2 %><br>
-  <% end %>
-  <%= @address.city %>, <%= @address.state %> <%= @address.zip %>
+  <%= render partial: 'addresses/block', locals: {address: @address} %>
 </p>
 
 <h2>Routes</h2>
 <ul>
   <% @address.routes.each do |route| %>
     <li>
-      <%= link_to "#{route.name}, owned by #{route.user.full_name}", route_path(route) %>
+      <%= link_to route.name, route_path(route) %>,
+      owned by
+      <%= link_to route.user.full_name, user_path(route.user) %>
       <b>
-        <% if route.origin == @address %>
+        <% if route.has_origin?(@address) %>
           Origin
         <% end %>
-        <% if route.destination == @address %>
+        <% if route.has_destination?(@address) %>
           Destination
         <% end %>
       </b>
@@ -32,6 +30,7 @@
   <% end %>
 </ul>
 
+<br>
 
 <%= link_to "Edit address", edit_address_path %>
 <%= link_to "Delete address", address_path, method: :delete %>

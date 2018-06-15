@@ -12,6 +12,13 @@
     </li>
   <% end %>
 </ul>
+<%= link_to "New route", new_route_path %>
+
+<h2>Addresses</h2>
+<%= render partial: 'addresses/list', locals: {addresses: @user.addresses} %>
+<%= link_to "New address", new_address_path %>
+
+<br><br><br>
 
 <%= link_to "Edit user", edit_user_path %>
 <%= link_to "Delete user", user_path, method: :delete %>

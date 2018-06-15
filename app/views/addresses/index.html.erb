@@ -5,11 +5,15 @@
   Addresses
 </h1>
 
-<ul>
-<% @addresses.each do |address| %>
-  <li><%= link_to address.line_1, address_path(address) %></li>
-<% end %>
-</ul>
+<div>
+  <h3>Filter addresses:</h3>
+  <%= form_tag("/addresses", method: "get") do %>
+    <%= select_tag :borough, options_for_select(Address::BOROUGHS), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
+<%= render partial: 'addresses/list', locals: {addresses: @addresses} %>
 
 <br>
 
