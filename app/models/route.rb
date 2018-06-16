@@ -8,13 +8,11 @@ class Route < ApplicationRecord
 
   def origin_attributes=(origin_attributes)
     if origin_attributes.reject {|k, v| k == "borough" }.any? {|k, v| v != ""}
-      binding.pry
       self.origin = Address.find_or_create_by(origin_attributes)
     end
   end
 
   def destination_attributes=(destination_attributes)
-    binding.pry
     if destination_attributes.reject {|k, v| k == "borough" }.any? {|k, v| v != ""}
       self.destination = Address.find_or_create_by(destination_attributes)
     end
