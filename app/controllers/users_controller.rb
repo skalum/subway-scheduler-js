@@ -19,6 +19,24 @@ class UsersController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @user.destroy
+    log_out
+    flash[:notice] = "User deleted."
+    redirect_to root_path
+  end
+
   private
 
   def set_user
