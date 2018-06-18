@@ -52,4 +52,4 @@ When you're finished, click Submit new issue.
 
 ## License
 
-Copyright (c) 2017 Alberto Mayanga, See [LICENSE](https://github.com/Booligan/down_to_play_rails/blob/master/LICENSE.md) for details.
+Copyright (c) 2018 Sam Kalum, See [LICENSE](https://github.com/skalum/subway-scheduler/LICENSE) for details.
