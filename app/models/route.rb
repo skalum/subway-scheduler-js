@@ -3,8 +3,10 @@ class Route < ApplicationRecord
   belongs_to :destination, class_name: 'Address', foreign_key: 'destination_id'
   belongs_to :user
 
-#  accepts_nested_attributes_for :origin
-#  accepts_nested_attributes_for :destination
+  validates :origin, presence: true
+  validates :destination, presence: true
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :user, message: "route name must be unique" }
 
   def origin_attributes=(origin_attributes)
     if origin_attributes.reject {|k, v| k == "borough" }.any? {|k, v| v != ""}

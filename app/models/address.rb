@@ -4,6 +4,7 @@ class Address < ApplicationRecord
   has_many :routes, ->(address) { unscope(where: :address_id).where("origin_id = ? OR destination_id = ?", address.id, address.id) }, class_name: 'Route'
   has_many :users, through: :routes
 
+  validates :line_1, presence: true
   validates_inclusion_of :borough, in: BOROUGHS
 
   def to_s
