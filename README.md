@@ -4,7 +4,7 @@ Subway Scheduler saves your commonly used addresses and fetches directions betwe
 
 ## Usage
 
-Please follow the instructions below to clone the subway-scheduler repository, start the server, and navigate to http://localhost:3000 in your browser. At the landing page you have the option to Sign in via Google, or sign up with an email and password. Once logged in, users will be redirected to their user page, where they can create new routes between two addresses, or single addresses.
+To use this app, just clone, run `bundle install`, `rake db:migrate`, `rake db:seed` and then run `rails s`.
 
 ### Create a new route:
 
@@ -30,26 +30,12 @@ Here, all routes for a user (accessed via /users/:user_id/routes) or the logged-
 
 Here, all addresses are visible, and are filterable by Borough.
 
+## Contribution
 
-## Installation
-
-```
-git clone git@github.com:skalum/subway-scheduler.git
-cd subway-scheduler
-rails db:migrate
-rails s
-```
-Navigate on a browser to: http://localhost:3000
-
-## Contributors
-
-Creating an issue:
-
-Under this repository, click 'Issues'
-Click 'New issue'
-Type a title and description for your issue.
-When you're finished, click Submit new issue.
+Bug reports and pull requests are welcome on GitHub at https://github.com/skalum/subway-scheduler. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
 
 ## License
 
-Copyright (c) 2018 Sam Kalum, See [LICENSE](https://github.com/skalum/subway-scheduler/LICENSE) for details.
+[subway-scheduler](https://github.com/skalum/subway-scheduler/blob/master/LICENSE) is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## More Info
