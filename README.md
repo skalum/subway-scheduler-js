@@ -1,24 +1,55 @@
-# README
+# Subway Scheduler
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Subway Scheduler saves your commonly used addresses and fetches directions between them from the Google Maps API.
 
-Things you may want to cover:
+## Usage
 
-* Ruby version
+Please follow the instructions below to clone the subway-scheduler repository, start the server, and navigate to http://localhost:3000 in your browser. At the landing page you have the option to Sign in via Google, or sign up with an email and password. Once logged in, users will be redirected to their user page, where they can create new routes between two addresses, or single addresses.
 
-* System dependencies
+### Create a new route:
 
-* Configuration
+Here, the user can create a new route between two addresses in New York City. A route can be created using previously entered addresses (via a pulldown menu) or by entering new addresses.
 
-* Database creation
+### Create a new address:
 
-* Database initialization
+Here, the user can create a single address.
 
-* How to run the test suite
+### View a route:
 
-* Services (job queues, cache servers, search engines, etc.)
+Users can view a route (two addresses), as well as transit directions between them (fetched via Google Maps API).
 
-* Deployment instructions
+### View an address:
 
-* ...
+Users can view an address, as well as all routes to which that address belongs. Also shown are all users who have that address in one of their routes.
+
+### View all routes:
+
+Here, all routes for a user (accessed via /users/:user_id/routes) or the logged-in user's routes (via /routes) are visible, with their origin and destination addresses.
+
+### View all addresses:
+
+Here, all addresses are visible, and are filterable by Borough.
+
+
+## Installation
+
+```
+git clone git@github.com:skalum/subway-scheduler.git
+cd subway-scheduler
+rails db:migrate
+rails s
+```
+Navigate on a browser to: http://localhost:3000
+
+## Contributors
+
+Creating an issue:
+
+Under this repository, click 'Issues'
+Click 'New issue'
+Type a title and description for your issue.
+When you're finished, click Submit new issue.
+
+## License
+
+Copyright (c) 2017 Alberto Mayanga, See [LICENSE](https://github.com/Booligan/down_to_play_rails/blob/master/LICENSE.md) for details.
