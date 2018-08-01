@@ -5,6 +5,7 @@ class AddressesController < ApplicationController
   def index
     if params[:borough]
       @addresses = Address.select_borough(params[:borough])
+      @borough = params[:borough]
     else
       @addresses = Address.all
     end
