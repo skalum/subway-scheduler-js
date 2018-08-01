@@ -16,13 +16,16 @@ class SessionsController < ApplicationController
   end
 
   def create_from_google
-    user = User.find_or_create_by(email: auth[:info][:email]) do |u|
-      u.first_name = auth[:info][:first_name] unless u.first_name
-      u.last_name = auth[:info][:last_name] unless u.last_name
-      u.google_uid = auth[:uid]
+    user = User.find_by(email: auth[:info][:email])
+    if !user
+      user = User.create(email: auth[:info][:email], password: SecureRandom.hex(20))
     end
+    
+    user.first_name = auth[:info][:first_name] unless user.first_name
+    user.last_name = auth[:info][:last_name] unless user.last_name
+    user.google_uid = auth[:uid]
 
-    if user
+    if user && user.save
       log_in user
       redirect_to root_path
     else
