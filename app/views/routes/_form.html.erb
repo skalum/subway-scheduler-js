@@ -30,7 +30,7 @@
     <%= origin_fields.text_field :city %><br>
 
     <%= origin_fields.label :borough %>
-    <%= origin_fields.select :borough, options_for_select(Address::BOROUGHS) %><br>
+    <%= origin_fields.select :borough, Address::BOROUGHS %><br>
 
     <%= origin_fields.label :zip %>
     <%= origin_fields.text_field :zip %>
@@ -53,7 +53,7 @@
     <%= destination_fields.text_field :city %><br>
 
     <%= destination_fields.label :borough %>
-    <%= destination_fields.select :borough, options_for_select(Address::BOROUGHS) %><br>
+    <%= destination_fields.select :borough, Address::BOROUGHS %><br>
 
     <%= destination_fields.label :zip %>
     <%= destination_fields.text_field :zip %><br>

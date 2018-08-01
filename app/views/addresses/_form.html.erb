@@ -11,7 +11,7 @@
   <%= f.text_field :city %><br>
 
   <%= f.label :borough %>
-  <%= f.select :borough, options_for_select(Address::BOROUGHS)  %><br>
+  <%= f.select :borough, Address::BOROUGHS  %><br>
 
   <%= f.label :zip %>
   <%= f.text_field :zip %><br>
