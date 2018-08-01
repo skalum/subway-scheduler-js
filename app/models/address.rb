@@ -7,6 +7,8 @@ class Address < ApplicationRecord
   validates :line_1, presence: true
   validates_inclusion_of :borough, in: BOROUGHS
 
+  scope :select_borough, ->(borough) { where("borough = ?", borough) if borough.present? }
+
   def to_s
     add_as_s = ''
 
@@ -18,6 +20,7 @@ class Address < ApplicationRecord
     add_as_s
   end
 
+=begin
   def self.select_borough(borough)
     if borough != ""
       where("borough == ?", borough)
@@ -25,5 +28,6 @@ class Address < ApplicationRecord
       self.all
     end
   end
+=end
 
 end
