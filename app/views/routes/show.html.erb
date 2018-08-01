@@ -50,5 +50,5 @@
   <% end %>
 </ul>
 
-<%= link_to "Edit route", edit_route_path %>
+<%= link_to "Edit route", edit_user_route_path(@route.user) %>
 <%= link_to "Delete route", route_path, method: :delete %>
