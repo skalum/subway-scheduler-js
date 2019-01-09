@@ -1,3 +1,3 @@
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :line_1, :line_2, :city, :borough, :zip
 end
