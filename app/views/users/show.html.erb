@@ -1,17 +1,7 @@
 <h1><%= @user.full_name %></h1>
 
 <h2>Routes</h2>
-<ul>
-  <% @user.routes.each do |route| %>
-    <li>
-      <%= link_to route.name, route_path(route) %>
-      <ul>
-        <li>Origin: <%= route.origin.to_s %></li>
-        <li>Destination: <%= route.destination.to_s %></li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+<ul id="routes-list" data-user-id="<%= @user.id %>"></ul>
 <%= link_to "New route", new_route_path %>
 
 <h2>Addresses</h2>
