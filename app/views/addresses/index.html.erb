@@ -13,8 +13,8 @@
   <% end %>
 </div>
 
-<%= render partial: 'addresses/list', locals: {addresses: @addresses} %>
+<ul id="address-list"></ul>
 
-<br>
-
-<%= link_to "Add New Address", new_address_path %>
+<div id="new-address-form">
+  <%= render 'form' %>
+</div>
