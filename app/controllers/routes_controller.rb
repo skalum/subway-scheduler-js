@@ -11,6 +11,13 @@ class RoutesController < ApplicationController
     end
 
     @routes = @user.routes
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @routes
+      }
+    end
   end
 
   def new

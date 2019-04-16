@@ -3,11 +3,19 @@ class AddressesController < ApplicationController
   before_action :require_logged_in
 
   def index
+    @address = Address.new
     if params[:borough]
       @addresses = Address.select_borough(params[:borough])
       @borough = params[:borough]
     else
       @addresses = Address.all
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @addresses
+      }
     end
   end
 
@@ -26,6 +34,12 @@ class AddressesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @addresses
+      }
+    end
   end
 
   def edit
