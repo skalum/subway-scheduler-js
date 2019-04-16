@@ -1,0 +1,20 @@
+<ul>
+  <li>Origin: <a href="/addresses/{{this.origin.id}}">{{this.origin.string}}</a></li>
+  <li>Destination: <a href="/addresses/{{this.destination.id}}">{{this.destination.string}}</a></li>
+  <li>
+    Directions:
+    <ol>
+      {{#each this.directions}}
+      <li>
+        {{#if this.transit}}<img src="{{this.transit.line.icon}}">{{/if}}
+        {{{this.instructions}}}
+        <ol>
+          {{#each this.steps}}
+            <li>{{{this.instructions}}}</li>
+          {{/each}}
+        </ol>
+      </li>
+      {{/each}}
+    </ol>
+  </li>
+</ul>
