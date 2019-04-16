@@ -1,0 +1,11 @@
+{{#each items}}
+  <li>
+    <a class="show_route" data-route-id="{{this.id}}" href="/routes/{{this.id}}">{{this.name}}</a>
+  </li>
+{{/each}}
+
+
+<!-- <ul>
+  <li>Origin: <a href="/addresses/{{this.origin.id}}">{{this.origin.line_1}}, {{#if this.origin.line_2}}{{this.origin.line_2}}, {{/if}}{{this.origin.city}}, NY {{this.origin.zip}}</a></li>
+  <li>Destination: <a href="/addresses/{{this.destination.id}}">{{this.destination.line_1}}, {{#if this.destination.line_2}}{{this.destination.line_2}}, {{/if}}{{this.destination.city}}, NY {{this.destination.zip}}</a></li>
+</ul> -->
